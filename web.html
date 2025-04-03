@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full-Screen Video Player</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
         * {
             margin: 0;
@@ -33,14 +34,29 @@
     </style>
 </head>
 <body>
-    <div class="video-container">
-        <iframe 
-            src="https://www.youtube.com/embed/SJx_cr4udHE?si=y-G6AFXZV1wt7TeD&amp;start=1" 
-            title="YouTube video player" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            allowfullscreen>
-        </iframe>
+    <div id="app">
+        <video-player></video-player>
     </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            components: {
+                'video-player': {
+                    template: `
+                        <div class="video-container">
+                            <iframe :src="videoUrl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    `,
+                    data() {
+                        return {
+                            videoUrl: "https://www.youtube.com/embed/SJx_cr4udHE?autoplay=1&controls=0&start=1"
+                        };
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
 </body>
 </html>
