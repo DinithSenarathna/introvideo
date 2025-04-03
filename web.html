@@ -34,29 +34,25 @@
     </style>
 </head>
 <body>
-    <div id="app">
-        <video-player></video-player>
-    </div>
+    <div id="app"></div>
 
     <script>
-        const { createApp } = Vue;
+        const { createApp, defineComponent } = Vue;
 
-        createApp({
-            components: {
-                'video-player': {
-                    template: `
-                        <div class="video-container">
-                            <iframe :src="videoUrl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    `,
-                    data() {
-                        return {
-                            videoUrl: "https://www.youtube.com/embed/SJx_cr4udHE?autoplay=1&controls=0&start=1"
-                        };
-                    }
-                }
+        const VideoPlayer = defineComponent({
+            template: `
+                <div class="video-container">
+                    <iframe :src="videoUrl" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            `,
+            data() {
+                return {
+                    videoUrl: "https://www.youtube.com/embed/SJx_cr4udHE?autoplay=1&controls=0"
+                };
             }
-        }).mount('#app');
+        });
+
+        createApp(VideoPlayer).mount("#app");
     </script>
 </body>
 </html>
